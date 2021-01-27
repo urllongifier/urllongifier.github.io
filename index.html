@@ -4,20 +4,7 @@
 
 <head>
     <link rel="stylesheet" href="css/style.css">
-</head>
-
-<body>
-    <form>
-        <p>Enter the link you want to longify:</p>
-        <input type="text" placeholder="Link">
-        <button>Submit</button>
-    </form>
-    <br>
-    <p id="results"></p>
     <script>
-        const linkForm = document.querySelector('form');
-        const results = document.querySelector('#results');
-
         const deobfuscator = (text, shift = 25565) => {
             const textLength = text.length;
             let deObfText = '';
@@ -39,6 +26,32 @@
             return -1;
         };
 
+        if (document.URL.includes('?')) {
+            const currentRedirect = document.URL.split('?')[1];
+            console.log('Redirecting to: ', currentRedirect);
+
+            if (currentRedirect.length > 0) {
+                const deObfRedirect = deobfuscator(currentRedirect);
+                //console.log(deObfRedirect);
+                window.location.replace(deObfRedirect);
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <form>
+        <p>Enter the link you want to longify:</p>
+        <input type="text" placeholder="Link">
+        <button>Submit</button>
+    </form>
+    <br>
+    <p id="results"></p>
+
+    <script>
+        const linkForm = document.querySelector('form');
+        const results = document.querySelector('#results');
+
         const obfuscator = (text, shift = 25565, length = 1900) => {
             const textLength = text.length;
             let obfText = '';
@@ -49,19 +62,6 @@
 
             return obfText;
         };
-
-        document.addEventListener("DOMContentLoaded", () => {
-            if (document.URL.includes('?')) {
-                const currentRedirect = document.URL.split('?')[1];
-                console.log('Redirecting to: ', currentRedirect);
-
-                if (currentRedirect.length > 0) {
-                    const deObfRedirect = deobfuscator(currentRedirect);
-                    //console.log(deObfRedirect);
-                    window.location.replace(deObfRedirect);
-                }
-            }
-        });
 
         linkForm.addEventListener('submit', (ev) => {
             ev.preventDefault();
