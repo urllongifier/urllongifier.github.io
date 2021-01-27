@@ -67,7 +67,7 @@
         linkForm.addEventListener('submit', (ev) => {
             ev.preventDefault();
 
-            const currentLink = document.URL
+            const currentLink = document.URL.replace('?', '');
             const wantedLink = linkForm.querySelector('input').value;
             let link = currentLink + '?' + obfuscator(wantedLink);
 
