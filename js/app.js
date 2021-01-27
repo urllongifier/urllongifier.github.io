@@ -37,12 +37,12 @@ const obfuscator = (text, shift = 25565, length = 1024) => {
 document.addEventListener("DOMContentLoaded", () => {
     if (document.URL.includes('?')) {
         const currentRedirect = document.URL.split('?')[1];
-        console.log(currentRedirect);
+        console.log('Redirecting to: ', currentRedirect);
 
         if (currentRedirect.length > 0) {
             const deObfRedirect = deobfuscator(currentRedirect);
             //console.log(deObfRedirect);
-            window.location.href = deObfRedirect;
+            window.location.replace(deObfRedirect);
         }
     }
 });
